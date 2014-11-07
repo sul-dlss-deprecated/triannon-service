@@ -19,7 +19,7 @@ set :deploy_to, "#{File.join fetch(:home_parent_dir), fetch(:user), fetch(:appli
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :info
 
 # Default value for :pty is false
 # set :pty, true
