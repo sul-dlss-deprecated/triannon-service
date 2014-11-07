@@ -2,15 +2,15 @@
 lock '3.2.1'
 
 set :application, 'triannon'
-set :repo_url, 'https://github.com/sul-dlss/triannon.git'
+set :repo_url, 'https://github.com/sul-dlss/triannon-service.git'
 
 # Prompt for the correct username
-set :user, ask(:user, 'enter in the app username')
+ask(:user, 'enter the app username')
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-
-ask :deploy_to, '/path/to/my/app'
+ask(:home_parent_dir, %{Enter the full path of the parent of the home dir (e.g. /home)})
+set :deploy_to, "#{File.join fetch(:home_parent_dir), fetch(:user), fetch(:application)}"
 
 # Default value for :scm is :git
 # set :scm, :git
