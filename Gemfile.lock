@@ -185,6 +185,8 @@ GEM
       rdf (>= 1.1)
     rdf-fcrepo4 (0.0.6)
       rdf
+    rdf-iiif (0.0.2)
+      rdf
     rdf-isomorphic (1.1.0)
       rdf (>= 1.1)
     rdf-json (1.1.0)
@@ -267,12 +269,13 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    triannon (0.2.0)
+    triannon (0.3.0)
       bootstrap-sass
       faraday
       linkeddata
       rails (~> 4.2.0.beta1)
       rdf-fcrepo4
+      rdf-iiif
       rdf-ldp
       rdf-open_annotation
       sass-rails (>= 5.0.0.beta1)
