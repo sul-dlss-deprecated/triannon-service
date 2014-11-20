@@ -12,3 +12,13 @@ $ bundle update triannon
 $ git push origin master
 $ cap development deploy
 ```
+
+You will see
+
+```console
+Please enter home_parent_dir (Enter the full path of the parent of the home dir (e.g. /home)):
+Please enter user (enter the app username):
+Please enter deploy_host (Enter in the server you are deploying to. do not include .stanford.edu):
+```
+
+You may need to ssh to the target box to learn the correct answers to these questions ...
