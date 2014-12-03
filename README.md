@@ -1,16 +1,49 @@
 [![Dependency Status](https://gemnasium.com/sul-dlss/triannon.svg)](https://gemnasium.com/sul-dlss/triannon)
 
-# Triannon-Service
+## Triannon-Service
 
 An essentially empty Rails app used for deploying the triannon gem.  Triannon stores OpenAnnotation data in Fedora4.
 
-# To Update Triannon
+# Client Interactions with Triannon app
+
+### Get a list of annos
+GET: http://(host)/annotations/annotations
+
+### Get a particular anno
+GET: http://(host)/annotations/annotations/(anno_id)
+* use HTTP Accept header with mime type to indicate desired format
+** default:  jsonld
+** also supports turtle, rdfxml, html
+** see https://github.com/sul-dlss/triannon/blob/master/app/controllers/triannon/annotations_controller.rb #show method for mime formats accepted
+
+#### JSON-LD context
+You can request IIIF or OA context for jsonld.  You can use either of these methods (with the correct HTTP Accept header):
+
+GET: http://(host)/annotations/annotations/iiif/(anno_id)
+GET: http://(host)/annotations/annotations/(anno_id)?jsonld_context=iiif
+
+GET: http://(host)/annotations/annotations/oa/(anno_id)
+GET: http://(host)/annotations/annotations/(anno_id)?jsonld_context=oa
+
+Note that OA (Open Annotation) is the default context if none is specified.
+
+### Create an anno
+POST: http://(host)/annotations/annotations
+* the body of the HTTP request should contain the annotation, as jsonld, turtle, or rdfxml
+* the anno to be created should NOT already have an assigned @id
+
+### Delete an anno
+DELETE: http://(host)/annotations/annotations/(anno_id)
+
+
+# To Update Triannon in this app
 * Cut a new release of the Triannon gem.
 * In your local instance of THIS code, 
 ```console
 $ bundle update triannon
+$ git commit -m "updated triannon gem to release x.y.z" Gemfile.lock ...
 $ git push origin master
-$ cap development deploy
+$ cap (development) deploy
 ```
 
 You will see
