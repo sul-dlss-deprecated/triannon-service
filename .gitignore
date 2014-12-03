@@ -16,3 +16,5 @@ config/triannon.yml
 
 # Ignore local ruby setup files
 .ruby-*
+# Ignore local capistrano files
+.capistrano/*
