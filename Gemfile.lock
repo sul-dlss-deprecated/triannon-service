@@ -272,7 +272,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    triannon (0.4.1)
+    triannon (0.4.2)
       bootstrap-sass
       faraday
       linkeddata
