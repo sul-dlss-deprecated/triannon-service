@@ -45,6 +45,10 @@ group :development, :test do
 
 end
 
+group :test do
+  gem 'rspec-rails'
+end
+
 group :deployment do
   gem 'lyberteam-capistrano-devel'
   gem 'capistrano-bundler'
