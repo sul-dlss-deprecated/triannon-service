@@ -18,3 +18,5 @@ config/triannon.yml
 .ruby-*
 # Ignore local capistrano files
 .capistrano/*
+# Ignore local rspec files
+.rspec*
