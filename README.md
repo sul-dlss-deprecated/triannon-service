@@ -21,11 +21,11 @@ An essentially empty Rails app used for deploying the [triannon](https://github.
 #### JSON-LD context
 You can request IIIF or OA context for jsonld.  You can use either of these methods (with the correct HTTP Accept header):
 
-`GET`: `http://(host)/annotations/iiif/(anno_id)`
-`GET`: `http://(host)/annotations/(anno_id)?jsonld_context=iiif`
+* `GET`: `http://(host)/annotations/iiif/(anno_id)`
+* `GET`: `http://(host)/annotations/(anno_id)?jsonld_context=iiif`
 
-`GET`:` http://(host)/annotations/oa/(anno_id)`
-`GET`: `http://(host)/annotations/(anno_id)?jsonld_context=oa`
+* `GET`:` http://(host)/annotations/oa/(anno_id)`
+* `GET`: `http://(host)/annotations/(anno_id)?jsonld_context=oa`
 
 Note that OA (Open Annotation) is the default context if none is specified.
 
