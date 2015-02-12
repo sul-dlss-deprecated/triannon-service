@@ -13,10 +13,10 @@ An essentially empty Rails app used for deploying the [triannon](https://github.
 ### Get a particular anno
 `GET: http://(host)/annotations/(anno_id)`
 
-* use HTTP Accept header with mime type to indicate desired format
-** default:  jsonld
-** also supports turtle, rdfxml, html
-** see [annotations#show](https://github.com/sul-dlss/triannon/blob/master/app/controllers/triannon/annotations_controller.rb) for other mime formats accepted
+use HTTP Accept header with mime type to indicate desired format
+* default:  jsonld
+* also supports turtle, rdfxml, html
+* see [annotations#show](https://github.com/sul-dlss/triannon/blob/master/app/controllers/triannon/annotations_controller.rb) for other mime formats accepted
 
 #### JSON-LD context
 You can request IIIF or OA context for jsonld.  You can use either of these methods (with the correct HTTP Accept header):
