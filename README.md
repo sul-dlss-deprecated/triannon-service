@@ -7,8 +7,8 @@ An essentially empty Rails app used for deploying the [triannon](https://github.
 # Client Interactions with Triannon app
 
 ### Get a list of annos
-`GET`: `http://(host)/`
-`GET`: `http://(host)/annotations`
+* `GET`: `http://(host)/`
+* `GET`: `http://(host)/annotations`
 
 ### Get a particular anno
 `GET: http://(host)/annotations/(anno_id)`
