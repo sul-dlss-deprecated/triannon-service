@@ -4,24 +4,41 @@
 
 An essentially empty Rails app used for deploying the [triannon](https://github.com/sul-dlss/triannon) gem.  Triannon stores [OpenAnnotation](http://www.openannotation.org/) data in [Fedora4](http://fcrepo.org/).
 
-# Client Interactions with Triannon app
+## Configuration
+
+We deploy this app with Capistrano.  If you are deploying it manually, note that you will need to do the following:
+1. Install the gems
+`bundle install`
+
+2. Edit the `config/triannon.yml` file:
+* `ldp_url:` Points to the root annotations container on your LDP server
+* `solr_url:` Points to the baseurl of Solr instance configured for Triannon
+* `triannon_base_url:` Used as the base url for all annotations hosted by your Triannon server.  Identifiers from the LDP server will be appended to this base-url. Generally something like "https://your-triannon-rails-box/annotations", as "/annotations" is added to the path by the Triannon gem
+
+3. Generate the root annotation container on the LDP server
+```console
+$ rake triannon:create_root_container
+```
+
+## Client Interactions with Triannon app
 
 ### Get a list of annos
+NOTE:  implementation of Annotation Lists is coming!
 * `GET`: `http://(host)/`
 * `GET`: `http://(host)/annotations`
 
 ### Get a particular anno
-`GET: http://(host)/annotations/(anno_id)`
+`GET`: `http://(host)/annotations/(anno_id)`
 
-* use HTTP Accept header with mime type to indicate desired format
+* use HTTP `Accept` header with mime type to indicate desired format
   * default:  jsonld
     * indicate desired context url in the HTTP Accept header thus:
-      * Accept: application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json" 
-	  * Accept: application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"
+      * `Accept`: `application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"`
+	  * `Accept`: `application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"`
   * also supports turtle, rdfxml, json, html
     * indicated desired context url for jsonld as json in the HTTP Link header thus:
-      * Accept: application/json
-      * Link: http://www.w3.org/ns/oa.json; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"
+      * `Accept`: `application/json`
+      * `Link`: `http://www.w3.org/ns/oa.json; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"`
         * note that the "type" part is optional and refers to the type of the rel, which is the reference for all json-ld contexts.
   * see https://github.com/sul-dlss/triannon/blob/master/app/controllers/triannon/annotations_controller.rb #show method for mime formats accepted
 
@@ -30,8 +47,8 @@ You can request IIIF or OA context for jsonld.
 
 The correct way:
 * use HTTP Accept header with mime type and context url:
-  * Accept: application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"
-  * Accept: application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"
+  * `Accept`: `application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"`
+  * `Accept`: `application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"`
 
 You can also use either of these methods (with the correct HTTP Accept header):
 
@@ -51,11 +68,11 @@ Note that OA (Open Annotation) is the default context if none is specified.
 * to get a particular format back, use the HTTP Accept header
 * to get a particular format back, use the HTTP Accept header
   * to get a particular context for jsonld, do one of the following:
-    * Accept: application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"
-    * Accept: application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"
+    * `Accept`: `application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"`
+    * `Accept`: `application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"`
   * to get a particular jsonld context for jsonld as json, specify it in the HTTP Link header thus:
-    * Accept: application/json
-    * Link: http://www.w3.org/ns/oa.json; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"
+    * `Accept`: `application/json`
+    * `Link`: `http://www.w3.org/ns/oa.json; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"`
       * note that the "type" part is optional and refers to the type of the rel, which is the reference for all json-ld contexts.
 
 ### Delete an anno
