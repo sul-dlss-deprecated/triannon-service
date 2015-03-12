@@ -46,7 +46,7 @@ NOTE:  implementation of Annotation Lists is coming!
 You can request IIIF or OA context for jsonld.
 
 The correct way:
-* use HTTP Accept header with mime type and context url:
+* use HTTP `Accept` header with mime type and context url:
   * `Accept`: `application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"`
   * `Accept`: `application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"`
 
@@ -63,10 +63,9 @@ Note that OA (Open Annotation) is the default context if none is specified.
 ### Create an anno
 `POST`: `http://(host)/annotations`
 * the body of the HTTP request should contain the annotation, as jsonld, turtle, or rdfxml
-* the Content-Type header should be the mime type matching the body
+* the `Content-Type` header should be the mime type matching the body
 * the anno to be created should NOT already have an assigned @id
-* to get a particular format back, use the HTTP Accept header
-* to get a particular format back, use the HTTP Accept header
+* to get a particular format back, use the HTTP `Accept` header
   * to get a particular context for jsonld, do one of the following:
     * `Accept`: `application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"`
     * `Accept`: `application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"`
