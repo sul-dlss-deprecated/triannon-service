@@ -33,6 +33,12 @@ gem 'rails-html-sanitizer', '~> 1.0'
 
 gem 'triannon'
 
+# cache for jsonld context docs
+gem 'rest-client', '~> 1.7.2'
+gem 'rack-cache'
+gem 'rest-client-components'
+
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
