@@ -2,7 +2,7 @@
 
 ## Triannon-Service
 
-An essentially empty Rails app used for deploying the [triannon](https://github.com/sul-dlss/triannon) gem.  Triannon stores [OpenAnnotation](http://www.openannotation.org/) data in [Fedora4](http://fcrepo.org/).
+An essentially empty Rails app used for deploying the [triannon](https://github.com/sul-dlss/triannon) gem.  Triannon stores [OpenAnnotation](http://www.openannotation.org/) data in [Fedora4](http://fcrepo.org/).  Note that it is important to set up caching for jsonld context documents and this is documented in README for triannon gem (and is set up for this app).
 
 ## Configuration
 
