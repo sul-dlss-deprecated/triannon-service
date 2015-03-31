@@ -345,9 +345,9 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   rack-cache
-  rails (>= 4.2.0.rc1)
+  rails (>= 4.2.0)
   rails-html-sanitizer (~> 1.0)
-  rest-client (~> 1.7.2)
+  rest-client (~> 1.7.3)
   rest-client-components
   rspec-rails
   sass-rails

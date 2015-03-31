@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 4.2.0.rc1'
+gem 'rails', '>= 4.2.0'
 # Use SCSS for stylesheets
 # as of rails v 4.2.0.rc1 (but perhaps not needed forever):
 # the triannon dependencies (2nd level or lower) require sass;  the version from 
@@ -34,7 +34,7 @@ gem 'rails-html-sanitizer', '~> 1.0'
 gem 'triannon'
 
 # cache for jsonld context docs
-gem 'rest-client', '~> 1.7.2'
+gem 'rest-client', '~> 1.7.3'
 gem 'rack-cache'
 gem 'rest-client-components'
 
