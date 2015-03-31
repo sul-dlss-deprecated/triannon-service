@@ -28,7 +28,7 @@ set :log_level, :info
 set :linked_files, %w{config/triannon.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system config/environments}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets tmp/rack-cache vendor/bundle public/system config/environments}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
