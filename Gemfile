@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '>= 4.2.0'
 # Use SCSS for stylesheets
 # as of rails v 4.2.0.rc1 (but perhaps not needed forever):
-# the triannon dependencies (2nd level or lower) require sass;  the version from 
+# the triannon dependencies (2nd level or lower) require sass;  the version from
 #  the triannon dependencies conflicts with the rails application's dependencies on sass
 # magically, the following line fixes this problem.
 gem 'sass-rails'
@@ -34,7 +34,7 @@ gem 'rails-html-sanitizer', '~> 1.0'
 gem 'triannon'
 
 # cache for jsonld context docs
-gem 'rest-client', '~> 1.7.3'
+gem 'rest-client'
 gem 'rack-cache'
 gem 'rest-client-components'
 
