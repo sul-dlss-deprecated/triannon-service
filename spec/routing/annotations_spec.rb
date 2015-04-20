@@ -3,10 +3,10 @@ require "spec_helper"
 describe ApplicationController do
   routes { Triannon::Engine.routes }
 
-  it "root routes to triannon/annotations#index" do
-    expect(:get => "/").to route_to("triannon/annotations#index")
+  it "root routes to triannon/search#find" do
+    expect(:get => "/").to route_to("triannon/search#find")
   end
-  
+
   it "annotations/annotations should NOT be routed" do
     expect(:get => "/annotations/annotations").to_not route_to("triannon/annotations#index")
     expect(:put => "/annotations/annotations").to_not be_routable
