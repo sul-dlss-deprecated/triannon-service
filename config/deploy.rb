@@ -25,7 +25,7 @@ set :log_level, :info
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/triannon.yml config/environments/development.rb config/environments/production.rb}
+set :linked_files, %w{config/secrets.yml config/triannon.yml config/environments/development.rb config/environments/production.rb}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{bin log tmp/cache tmp/pids tmp/rack-cache/meta tmp/rack-cache/body tmp/sockets vendor/bundle public/system config/environments}
