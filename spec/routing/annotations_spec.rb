@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ApplicationController do
+describe ApplicationController, :type => :routing do
   routes { Triannon::Engine.routes }
 
   it "root routes to triannon/search#find" do
