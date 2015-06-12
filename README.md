@@ -11,14 +11,21 @@ We deploy this app with Capistrano.  If you are deploying it manually, note that
 `bundle install`
 
 2. Edit the `config/triannon.yml` file:
-* `ldp_url:` Points to the root annotations container on your LDP server
+* `ldp:` Properties of LDP server
+  * `url:` the baseurl of LDP server
+  * `uber_container:` name of an LDP Basic Container holding specific anno containers
+  * `anno_containers:`  (the names of LDP Basic Containers holding individual annos)
 * `solr_url:` Points to the baseurl of Solr instance configured for Triannon
-* `triannon_base_url:` Used as the base url for all annotations hosted by your Triannon server.  Identifiers from the LDP server will be appended to this base-url. Generally something like "https://your-triannon-rails-box/annotations", as "/annotations" is added to the path by the Triannon gem
+* `triannon_base_url:` Used as the base url for all annotations hosted by your Triannon server.  Identifiers from the LDP server will be appended to this base-url.  Generally something like "https://your-triannon-rails-box/annotations", as "/annotations" is added to the path by the Triannon gem
 
-3. Generate the root annotation container on the LDP server
+3. Generate the root annotation containers on the LDP server
 ```console
-$ rake triannon:create_root_container
+$ rake triannon:create_root_containers
 ```
+
+This will generate the uber_container and the anno_containers (aka 'root containers') under the uber_container.
+
+  NOTE:  you MUST create the root containers before creating any annotations.  All annotation MUST be created as a child of a root container.
 
 ## Client Interactions with Triannon app
 
@@ -33,16 +40,27 @@ Search Parameters:
 * `bodyExact` - matches body characters exactly
 * `bodyKeyword` - matches terms in body characters
 * `motivatedBy` - matches fragment part of motivation predicate URI, e.g.  commenting, tagging, painting
+* `anno_root` - matches the root container of the result annos
 
 * use HTTP `Accept` header with mime type to indicate desired format
   * default:  jsonld
     * `Accept`: `application/ld+json`
-  * also supports turtle, rdfxml, json, html
+  * also supports turtle, rdfxml, json, htmls
     * `Accept`: `application/x-turtle`
 
+### Get a list of annos in a particular root container
+as a IIIF Annotation List (see http://iiif.io/api/presentation/2.0/#other-content-resources)
+
+* `GET`: `http://(host)/annotations/(root container)/search?targetUri=some.url.org`
+
+Search Parameters as above.
+
+* use HTTP `Accept` header with mime type to indicate desired format, as above
 
 ### Get a particular anno
-`GET`: `http://(host)/annotations/(anno_id)`
+`GET`: `http://(host)/annotations/(root container)/(anno_id)`
+
+NOTE:  you may need to URL encode the anno_id (e.g. "6f%2F0e%2F79%2F92%2F6f0e7992-83f5-4f31-8bb7-94a23465fdfb" instead of "6f/0e/79/92/6f0e7992-83f5-4f31-8bb7-94a23465fdfb"), particularly from a web browser.
 
 * use HTTP `Accept` header with mime type to indicate desired format
   * default:  jsonld
@@ -64,18 +82,18 @@ The correct way:
   * `Accept`: `application/ld+json; profile="http://www.w3.org/ns/oa-context-20130208.json"`
   * `Accept`: `application/ld+json; profile="http://iiif.io/api/presentation/2/context.json"`
 
-You can also use either of these methods (with the correct HTTP Accept header):
+You can also use this method (with the correct HTTP Accept header):
 
-* `GET`: `http://(host)/annotations/iiif/(anno_id)`
-* `GET`: `http://(host)/annotations/(anno_id)?jsonld_context=iiif`
-
-* `GET`:` http://(host)/annotations/oa/(anno_id)`
-* `GET`: `http://(host)/annotations/(anno_id)?jsonld_context=oa`
+* `GET`: `http://(host)/annotations/(root)/(anno_id)?jsonld_context=iiif`
+* `GET`: `http://(host)/annotations/(root)/(anno_id)?jsonld_context=oa`
 
 Note that OA (Open Annotation) is the default context if none is specified.
 
 ### Create an anno
-`POST`: `http://(host)/annotations`
+
+Note that annos must be created in an existing root container.
+
+`POST`: `http://(host)/annotations/(root container)`
 * the body of the HTTP request should contain the annotation, as jsonld, turtle, or rdfxml
 * the `Content-Type` header should be the mime type matching the body
 * the anno to be created should NOT already have an assigned @id
@@ -89,8 +107,9 @@ Note that OA (Open Annotation) is the default context if none is specified.
       * note that the "type" part is optional and refers to the type of the rel, which is the reference for all json-ld contexts.
 
 ### Delete an anno
-`DELETE`: `http://(host)/annotations/(anno_id)`
+`DELETE`: `http://(host)/annotations/(root container)/(anno_id)`
 
+NOTE:  you may need to URL encode the anno_id (e.g. "6f%2F0e%2F79%2F92%2F6f0e7992-83f5-4f31-8bb7-94a23465fdfb" instead of "6f/0e/79/92/6f0e7992-83f5-4f31-8bb7-94a23465fdfb")
 
 # To Update Triannon in this app
 * Cut a new release of the Triannon gem.
